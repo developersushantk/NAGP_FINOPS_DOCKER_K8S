@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: school-api
+  namespace: sushant
+  labels:
+    app: school-api
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: school-api
+  template:
+    metadata:
+      labels:
+        app: school-api
+    spec:
+      containers:
+        - name: school-api
+          image: sushant693/school-api:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MYSQL_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: MYSQL_HOST
+            - name: MYSQL_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: MYSQL_USER
+            - name: MYSQL_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: MYSQL_NAME
+            - name: MYSQL_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: MYSQL_PORT
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_PASSWORD

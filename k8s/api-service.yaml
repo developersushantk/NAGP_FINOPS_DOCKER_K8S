@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: school-api
+  namespace: sushant
+spec:
+  selector:
+    app: school-api
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000

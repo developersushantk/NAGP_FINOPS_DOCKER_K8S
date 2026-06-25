@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  namespace: sushant
+data:
+  MYSQL_HOST: mysql-service
+  MYSQL_USER: schooluser
+  MYSQL_NAME: schooldb
+  MYSQL_PORT: "3306"
